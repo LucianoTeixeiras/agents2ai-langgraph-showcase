@@ -218,3 +218,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Agents2AI — segredos e artefatos locais
+.env
+.env.*
+!.env.example
+.secrets/
+.aider*
+.agent-kit/runtime/
+*.duckdb
+*.sqlite
+checkpoints/
