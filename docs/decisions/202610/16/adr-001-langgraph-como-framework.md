@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Status** | Proposta |
+| **Status** | Aceita (2026-10-16, Luciano) |
 | **Data** | 2026-10-16 |
 | **Decisores** | Luciano Teixeira (aceite) · Dev Grok Bot (proposta) |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Relacionados** | PRD e System Design `docs/contracts/202610/16/`; ADR-002…005 |
 
 ## Contexto (2026-10-16)

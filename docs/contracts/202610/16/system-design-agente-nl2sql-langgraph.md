@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Status** | Em revisão |
+| **Status** | Aprovado (2026-10-16) |
 | **PRD** | `prd-agente-nl2sql-langgraph.md` |
 | **ADRs** | ADR-001 (LangGraph), ADR-002 (dados), ADR-003 (LLM), ADR-004 (observabilidade), ADR-005 (guardrails) |
 | **Versões verificadas (2026-10-16, PyPI + teste local)** | `langgraph==1.2.15`, `langgraph-checkpoint-sqlite==3.1.2`, `sqlglot==30.23.0`, `duckdb==1.5.6`, `langchain-openai==1.7.2` |
@@ -18,8 +18,8 @@ flowchart TD
     gen --> guard[guardrail<br/>sqlglot: só leitura, 1 statement,<br/>LIMIT, tabelas permitidas, PII]
     guard -->|reprovado e attempts < 3| gen
     guard -->|reprovado e attempts >= 3| answer
-    guard -->|aprovado| cost[estimate_cost<br/>DuckDB=0 · BigQuery dry-run]
-    cost -->|bytes <= limite| exec[execute_sql<br/>DuckDB local · BigQuery public]
+    guard -->|aprovado| cost[estimate_cost<br/>DuckDB=0 · BigQuery dry-run (fase 2)]
+    cost -->|bytes <= limite| exec[execute_sql<br/>DuckDB local · BigQuery public (fase 2)]
     cost -->|bytes > limite| hitl[human_approval<br/>interrupt]
     hitl -->|aprovado| exec
     hitl -->|negado| answer
@@ -82,7 +82,12 @@ Regras: nós retornam **dict parcial**; só `trace` usa reducer. Nenhum nó guar
 - BigQuery: allowlist de prefixo `bigquery-public-data.thelook_ecommerce.`; job com `dry_run=True` para estimar e `maximum_bytes_billed` para executar.
 
 ## 8. Configuração (`src/showcase/settings.py`, env)
-`LLM_BASE_URL` (padrão `https://openrouter.ai/api/v1`), `LLM_API_KEY` (obrigatória só fora dos testes), `LLM_MODEL` (D-03), `BACKEND` (`duckdb`), `DUCKDB_PATH` (`data/sample.duckdb`), `GCP_PROJECT` (projeto de billing **da Agents2AI**, só para BigQuery), `MAX_BYTES_WITHOUT_APPROVAL` (`1_000_000_000`), `MAX_BYTES_BILLED` (`10_000_000_000`), `TRACE_LOG` (`true`), `LANGSMITH_TRACING` (opcional).
+`LLM_BASE_URL` (padrão `https://openrouter.ai/api/v1`), `LLM_API_KEY` (obrigatória só fora dos testes), `LLM_MODEL` (`nvidia/nemotron-3.5-lightning`, D-03), `BACKEND` (`duckdb`), `DUCKDB_PATH` (`data/sample.duckdb`), `MAX_BYTES_WITHOUT_APPROVAL` (`1_000_000_000`), `TRACE_LOG` (`true`), `LANGSMITH_TRACING` (opcional). **Fase 2 GCP (SPEC-LG-08):** `GCP_PROJECT` (projeto de testes **da Agents2AI**, nunca de cliente) e `MAX_BYTES_BILLED` (`10_000_000_000`).
+
+## 8a. Execução local em Docker (D-04 — Fase 1)
+- `Dockerfile`: `python:3.12-slim` + binário `uv` copiado de `ghcr.io/astral-sh/uv`; `uv sync --locked --no-dev`; usuário não-root `app`; sem segredos na imagem (`.dockerignore` exclui `.env`, `data/`, `checkpoints/`, `.git`).
+- `compose.yaml`: serviço `showcase` com `env_file: .env` (opcional), volumes `./data:/app/data` e `./checkpoints:/app/checkpoints`; `docker compose run --rm showcase ask "..."` gera o DuckDB se faltar e roda a CLI.
+- Nada de GCP na fase 1; BigQuery entra só na Fase 2 (SPEC-LG-08).
 
 ## 9. Observabilidade e evals
 - Decorador `traced(node_name)` mede duração e anexa `{"node", "ms", "tokens_in", "tokens_out"}` a `trace`; ao final, uma linha JSON INFO por execução (sem SQL de usuário com PII, sem chaves).
@@ -96,5 +101,7 @@ Regras: nós retornam **dict parcial**; só `trace` usa reducer. Nenhum nó guar
 | 2 | SPEC-LG-02 guardrail sqlglot | 01 | Pronta |
 | 3 | SPEC-LG-03 dataset DuckDB + catálogo + executor | 01 | Pronta |
 | 4 | SPEC-LG-04 nós LLM (intent, SQL, answer) + retry | 02, 03 | Pronta após 02/03 |
-| 5 | SPEC-LG-05 custo + HITL + SqliteSaver + BigQuery + CLI | 04 | Bloqueada (D-02, D-04) |
-| 6 | SPEC-LG-06 tracing + evals + README vitrine | 05 | Bloqueada (05) |
+| 5 | SPEC-LG-05 HITL + SqliteSaver + CLI (só DuckDB) | 04 | Pronta após 04 |
+| 6 | SPEC-LG-07 Dockerfile + compose | 05 | Pronta após 05 |
+| 7 | SPEC-LG-06 tracing + evals + README vitrine | 07 | Pronta após 07 |
+| 8 | SPEC-LG-08 Fase 2 GCP: BigQuery público | 06 + projeto GCP de testes | **Bloqueada** (fase 2) |

@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-01 |
 | **Status** | Pronta |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §2, §4, §5, §8, §10 · ADR-001, ADR-003 |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Branch** | `feat/lg-01-fundacao` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-low` |
@@ -35,7 +35,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 | `pyproject.toml` | alterar | `dependencies = ["langgraph==1.2.15", "pydantic-settings>=2.6"]` |
 | `uv.lock` | alterar | `uv lock` |
 | `.env.example` | criar | variáveis do System Design §8, **valores vazios ou padrão**, sem chaves |
-| `src/showcase/settings.py` | criar | `class Settings(BaseSettings)` com os campos do §8 (tipos: str/int/bool/Literal), `model_config = SettingsConfigDict(env_file=".env", extra="ignore")`; `llm_api_key: str = ""` |
+| `src/showcase/settings.py` | criar | `class Settings(BaseSettings)` com os campos do §8 (tipos: str/int/bool/Literal), `model_config = SettingsConfigDict(env_file=".env", extra="ignore")`; `llm_api_key: str = ""`; `llm_model: str = "nvidia/nemotron-3.5-lightning"` (D-03); **sem** campos GCP/BigQuery (vêm na SPEC-LG-08) |
 | `src/showcase/state.py` | criar | `AgentState` exatamente como System Design §2 |
 | `src/showcase/deps.py` | criar | `Protocol LLMClient.complete(self, system: str, user: str) -> str`; `Protocol SqlExecutor` com `catalog() -> dict[str, list[str]]`, `estimate_bytes(sql: str) -> int`, `run(sql: str, max_rows: int) -> list[dict]`; `@dataclass Deps(llm, executor, settings)` |
 | `src/showcase/nodes/__init__.py` | criar | reexporta os nós |
@@ -56,7 +56,7 @@ Rotas: `route_intent`, `route_guardrail` (erros e attempts<3 → `generate_sql`;
 - `test_fora_de_escopo`: pergunta `""` → recusa fixa; `FakeLLM` não consumido.
 - `test_interrupt_e_retomada_aprova`: bytes acima do limite → `__interrupt__[0].value["estimated_bytes"]`; `Command(resume=True)` → `"1 linha(s)."`.
 - `test_retomada_nega`: `Command(resume=False)` → mensagem de negação; `FakeExecutor.run` não chamado.
-- `test_settings_padroes`: `Settings()` sem env → `backend == "duckdb"`, `max_bytes_without_approval == 1_000_000_000`.
+- `test_settings_padroes`: `Settings()` sem env → `backend == "duckdb"`, `max_bytes_without_approval == 1_000_000_000`, `llm_model == "nvidia/nemotron-3.5-lightning"`.
 
 ## 7. Definição de Pronto (DoD)
 - [ ] Só os arquivos da §4 mudaram (`git diff --stat main`).

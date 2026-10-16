@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-03 |
 | **Status** | Pronta |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §7 · ADR-002, ADR-005 |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Branch** | `feat/lg-03-duckdb` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-low` |

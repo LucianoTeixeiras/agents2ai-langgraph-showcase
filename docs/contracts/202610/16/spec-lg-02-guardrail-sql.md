@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-02 |
 | **Status** | Pronta |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §6 · ADR-005 |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Branch** | `feat/lg-02-guardrail-sql` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-medium` |

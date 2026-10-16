@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Status** | Proposta |
+| **Status** | Aceita (2026-10-16, Luciano) |
 | **Data** | 2026-10-16 |
 | **Decisores** | Luciano Teixeira (aceite) · Dev Grok Bot (proposta) |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Relacionados** | PRD e System Design `docs/contracts/202610/16/`; ADR-005 |
 
 ## Contexto (2026-10-16)
@@ -13,10 +13,12 @@ Repositório público, vitrine de consultoria. Qualquer dado ou identificador de
 
 ## Decisão
 1. Backend padrão: **DuckDB** em arquivo local gerado por script determinístico com dados **sintéticos** no schema de `bigquery-public-data.thelook_ecommerce` (orders, order_items, products, users).
-2. Backend opcional: **BigQuery** restrito à allowlist de tabelas `bigquery-public-data.thelook_ecommerce.{orders,order_items,products,users}`; billing num projeto GCP **de testes da Agents2AI** (D-04), nunca de cliente.
+2. **Fase 2 GCP (D-04, Bloqueada):** backend opcional **BigQuery** restrito à allowlist de tabelas `bigquery-public-data.thelook_ecommerce.{orders,order_items,products,users}`; billing num projeto GCP **de testes da Agents2AI** (D-04), nunca de cliente.
 3. Toda execução BigQuery faz dry-run antes e usa `maximum_bytes_billed`.
 4. CI usa só DuckDB; BigQuery é mockado nos testes.
 5. Nenhum arquivo `.duckdb`/`.sqlite` é versionado.
+
+**Fase 1 (protótipo, D-04):** roda 100% em Docker com DuckDB sintético local; nenhuma credencial ou projeto GCP.
 
 ## Alternativas consideradas
 | Alternativa | Prós | Contras | Por que não |

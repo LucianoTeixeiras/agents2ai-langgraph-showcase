@@ -3,13 +3,13 @@
 | Campo | Valor |
 |-------|-------|
 | **ID** | SPEC-LG-06 |
-| **Status** | Bloqueada (SPEC-LG-05) |
+| **Status** | Pronta após SPEC-LG-07 |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §9 · ADR-004 |
-| **Jira** | pendente — D-01 |
+| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
 | **Branch** | `feat/lg-06-tracing-evals` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-low` |
-| **Depende de** | SPEC-LG-05 mergeada |
+| **Depende de** | SPEC-LG-07 mergeada |
 | **Tamanho máximo** | ≤ 300 linhas de diff, ≤ 8 arquivos (acima disso: pare e escale) |
 | **Commit de referência** | `main` após merge do PR de planejamento |
 

@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Status** | Em revisão |
+| **Status** | Aprovado (2026-10-16) |
 | **Autor (arquiteto)** | Dev Grok Bot (planner) |
 | **Dono do produto** | Luciano Teixeira |
-| **Jira (épico)** | pendente — projeto Jira do repositório ainda não definido (D-01) |
+| **Jira (épico)** | pendente — projeto novo `A2LG` (D-01) a ser criado por Luciano |
 | **Nível de risco QA** | `qa:risk-medium` (gera e executa SQL; repositório público) |
 | **Documentos relacionados** | `system-design-agente-nl2sql-langgraph.md`, ADR-001…005, specs `spec-lg-01…06` |
 
@@ -71,4 +71,4 @@ Ver ADR-005. Somente dados públicos; segredos só em `.env`; nada de cliente; S
 | Modelo barato erra SQL | retry com feedback + evals |
 
 ## 9. Decisões em aberto
-Ver `docs/DECISIONS-LOG.md` → "Decisões pendentes" (D-01…D-05).
+Decididas em 2026-10-16 (D-01…D-04, ver `docs/DECISIONS-LOG.md`). Fase 1 = protótipo 100% Docker + DuckDB sintético; Fase 2 = BigQuery público em projeto GCP de testes da Agents2AI. Em aberto: D-05.
