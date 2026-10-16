@@ -4,7 +4,7 @@
 |-------|-------|
 | **Status** | Aprovado (2026-10-16) |
 | **PRD** | `prd-agente-nl2sql-langgraph.md` |
-| **ADRs** | ADR-001 (LangGraph), ADR-002 (dados), ADR-003 (LLM), ADR-004 (observabilidade), ADR-005 (guardrails) |
+| **ADRs** | ADR-001 (LangGraph), ADR-002 (dados), ADR-003 (LLM), ADR-004 (observabilidade), ADR-005 (guardrails), ADR-006 (schema por similaridade) |
 | **Versões verificadas (2026-10-16, PyPI + teste local)** | `langgraph==1.2.15`, `langgraph-checkpoint-sqlite==3.1.2`, `sqlglot==30.23.0`, `duckdb==1.5.6`, `langchain-openai==1.7.2` |
 
 ## 1. Grafo
@@ -55,7 +55,7 @@ Regras: nós retornam **dict parcial**; só `trace` usa reducer. Nenhum nó guar
 | Nó | Entrada | Saída | Efeitos externos |
 |----|---------|-------|------------------|
 | `classify_intent` | question | intent | LLM |
-| `retrieve_schema` | backend | schema_context | leitura do catálogo permitido |
+| `retrieve_schema` | backend | schema_context | leitura do catálogo permitido; top-k por similaridade (ADR-006, SPEC-LG-09) |
 | `generate_sql` | question, schema_context, guardrail_errors | sql, attempts+1 | LLM |
 | `guardrail` | sql, backend | sql (com LIMIT), guardrail_errors | nenhum (puro) |
 | `estimate_cost` | sql, backend | estimated_bytes | BigQuery dry-run |
@@ -104,4 +104,5 @@ Regras: nós retornam **dict parcial**; só `trace` usa reducer. Nenhum nó guar
 | 5 | SPEC-LG-05 HITL + SqliteSaver + CLI (só DuckDB) | 04 | Pronta após 04 |
 | 6 | SPEC-LG-07 Dockerfile + compose | 05 | Pronta após 05 |
 | 7 | SPEC-LG-06 tracing + evals + README vitrine | 07 | Pronta após 07 |
-| 8 | SPEC-LG-08 Fase 2 GCP: BigQuery público | 06 + projeto GCP de testes | **Bloqueada** (fase 2) |
+| 8 | SPEC-LG-09 schema por similaridade (DuckDB vss, ADR-006) | 06 | Pronta após 06 |
+| 9 | SPEC-LG-08 Fase 2 GCP: BigQuery público | 06 + projeto GCP de testes | **Bloqueada** (fase 2) |

@@ -13,6 +13,7 @@
 - **D-02** Dataset de referência: `bigquery-public-data.thelook_ecommerce` **confirmado**.
 - **D-03** Modelo padrão: Nemotron via OpenRouter, id `nvidia/nemotron-3.5-lightning` (verificado em 2026-10-16; US$ 0,07/M entrada, US$ 0,20/M saída).
 - **D-04** **Docker-first:** Fase 1 = protótipo 100% em Docker (compose + DuckDB sintético local, sem GCP). Fase 2 = BigQuery público em projeto GCP de testes da Agents2AI (SPEC-LG-08, Bloqueada). SPEC-LG-05 dividida: HITL + SqliteSaver + CLI (só DuckDB); nova SPEC-LG-07 (Docker).
+- **ADR-006** Recuperação de schema por similaridade: DuckDB `FLOAT[n]` + extensão oficial `vss` (HNSW), índice em memória reconstruído no startup, sem persistência experimental; pgvector/vector DB dedicado é o caminho para escala (**Aceita**, Luciano). Spec: SPEC-LG-09.
 
 ## Decisões pendentes (Luciano)
 - **D-05** Destino OTel na fase 2 (sugestão: Langfuse, igual ao copilot).

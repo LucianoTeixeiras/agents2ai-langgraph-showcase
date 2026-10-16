@@ -8,7 +8,7 @@
 3. **Nunca** anexe `.env`, `.secrets/`, `checkpoints/` ou `*.duckdb` ao contexto do Cursor.
 
 ## 2. Uma spec por vez
-1. Pegue a próxima spec com **Status: Pronta**, na ordem do System Design §10 (01 → 02 → 03 → 04 → 05 → 07 → 06; a 08 é Fase 2 e está Bloqueada). Bloqueada não começa.
+1. Pegue a próxima spec com **Status: Pronta**, na ordem do System Design §10 (01 → 02 → 03 → 04 → 05 → 07 → 06 → 09; a 08 é Fase 2 e está Bloqueada). Bloqueada não começa.
 2. Chat novo no Cursor (modo Agent, modelo Composer), anexando **só**: `@spec-executor`, o arquivo da spec, os arquivos existentes da tabela §4 e, se citados, o System Design e a ADR.
 3. Prompt inicial:
    > Execute exatamente a spec anexada, seguindo a regra spec-executor. Não altere arquivos fora da seção 4. Se algo for ambíguo ou diferente do descrito, pare e me diga qual seção da spec está em conflito.
