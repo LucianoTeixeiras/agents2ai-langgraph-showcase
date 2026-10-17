@@ -28,7 +28,7 @@ def message_text(msg: BaseMessage) -> str:
     """Normaliza content str|list para str (só blocos de texto)."""
     return msg.text.strip()
 ```
-Em `OpenAICompatLLM.complete`: `return message_text(self._chat.invoke([("system", system), ("human", user)]))`. Teste extra obrigatório em `tests/test_llm_nodes.py`: `test_message_text_normaliza_lista` → `message_text(AIMessage(content=[{"type": "text", "text": "SELECT 1"}, {"type": "text", "text": " LIMIT 1"}])) == "SELECT 1 LIMIT 1"` e `message_text(AIMessage(content=" x ")) == "x"".
+Em `OpenAICompatLLM.complete`: `return message_text(self._chat.invoke([("system", system), ("human", user)]))`. Teste extra obrigatório em `tests/test_llm_nodes.py`: `test_message_text_normaliza_lista` → `message_text(AIMessage(content=[{"type": "text", "text": "SELECT 1"}, {"type": "text", "text": " LIMIT 1"}])) == "SELECT 1 LIMIT 1"` e `message_text(AIMessage(content=" x ")) == "x"`.
 
 ## 4. Arquivos e interfaces
 | Arquivo | Ação | O que muda |
