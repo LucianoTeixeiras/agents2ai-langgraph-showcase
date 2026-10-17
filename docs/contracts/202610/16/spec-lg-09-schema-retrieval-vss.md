@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-09 |
 | **Status** | Pronta após SPEC-LG-06 |
 | **PRD / System Design / ADRs** | System Design §3 (`retrieve_schema`) · ADR-006, ADR-002 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-10](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-10) (épico A2LG-1) |
 | **Branch** | `feat/lg-09-schema-vss` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-medium` |
@@ -53,4 +53,4 @@ As mesmas da SPEC-LG-05; mais: ligar persistência experimental, adicionar depen
 **Se a spec for ambígua, pare e pergunte; não improvise.**
 
 ## 10. PR
-Título: `feat(retrieval): schema por similaridade com DuckDB vss [pendente]`
+Título: `feat(retrieval): schema por similaridade com DuckDB vss [A2LG-10]`

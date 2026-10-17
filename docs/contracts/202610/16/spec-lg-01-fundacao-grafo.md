@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-01 |
 | **Status** | Pronta |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §2, §4, §5, §8, §10 · ADR-001, ADR-003 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-2](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-2) (épico A2LG-1) |
 | **Branch** | `feat/lg-01-fundacao` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-low` |
@@ -77,4 +77,4 @@ Rotas: `route_intent`, `route_guardrail` (erros e attempts<3 → `generate_sql`;
 ## 10. PR
 Título: ver abaixo. Corpo: Spec · O que foi feito · Evidência dos portões (saída real) · Desvios · Checklist DoD · Risco QA.
 
-Título: `feat(grafo): fundação LangGraph com estado, settings e nós stub [pendente]`
+Título: `feat(grafo): fundação LangGraph com estado, settings e nós stub [A2LG-2]`

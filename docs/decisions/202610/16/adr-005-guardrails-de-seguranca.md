@@ -5,7 +5,7 @@
 | **Status** | Aceita (2026-10-16, Luciano) |
 | **Data** | 2026-10-16 |
 | **Decisores** | Luciano Teixeira (aceite) · Dev Grok Bot (proposta) |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-11](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-11) (aceite ADRs 001–006) |
 | **Relacionados** | PRD e System Design `docs/contracts/202610/16/`; ADR-002, ADR-003 |
 
 ## Contexto (2026-10-16)

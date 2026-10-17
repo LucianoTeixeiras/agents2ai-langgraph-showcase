@@ -5,7 +5,7 @@
 | **Status** | Aprovado (2026-10-16) |
 | **Autor (arquiteto)** | Dev Grok Bot (planner) |
 | **Dono do produto** | Luciano Teixeira |
-| **Jira (épico)** | pendente — projeto novo `A2LG` (D-01) a ser criado por Luciano |
+| **Jira (épico)** | [A2LG-1](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-1) |
 | **Nível de risco QA** | `qa:risk-medium` (gera e executa SQL; repositório público) |
 | **Documentos relacionados** | `system-design-agente-nl2sql-langgraph.md`, ADR-001…005, specs `spec-lg-01…06` |
 

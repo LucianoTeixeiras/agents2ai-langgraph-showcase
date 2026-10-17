@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-08 |
 | **Status** | **Bloqueada** — Fase 2 (precisa do projeto GCP de testes da Agents2AI com alerta de US$ 10) |
 | **PRD / System Design / ADRs** | `system-design-agente-nl2sql-langgraph.md` §5, §7, §8 · ADR-002, ADR-005 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-9](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-9) (épico A2LG-1) |
 | **Branch** | `feat/lg-08-bigquery` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-high` |
@@ -38,4 +38,4 @@ Criar o projeto GCP (Luciano), outros datasets, deploy em GCP (Cloud Run fica pa
 Mesmas da SPEC-LG-05, e **nunca** colocar `project_id` real em código/teste (use `"test-project"`); nunca projeto de cliente.
 
 ## 10. PR
-Título: `feat(bigquery): backend BigQuery público na fase 2 [pendente]`
+Título: `feat(bigquery): backend BigQuery público na fase 2 [A2LG-9]`
