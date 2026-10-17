@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-02 |
 | **Status** | Pronta |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §6 · ADR-005 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-3](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-3) (épico A2LG-1) |
 | **Branch** | `feat/lg-02-guardrail-sql` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-medium` |
@@ -58,4 +58,4 @@ Reprovam: `DROP TABLE orders`; `DELETE FROM orders`; `INSERT ...`; `UPDATE ...`;
 ## 10. PR
 Título: ver abaixo. Corpo: Spec · O que foi feito · Evidência dos portões (saída real) · Desvios · Checklist DoD · Risco QA.
 
-Título: `feat(guardrail): validação somente-leitura de SQL com sqlglot [pendente]`
+Título: `feat(guardrail): validação somente-leitura de SQL com sqlglot [A2LG-3]`

@@ -24,7 +24,7 @@ O CI também roda **gitleaks** em todo o histórico: um segredo commitado reprov
 
 ## 4. Commit e PR
 - `git add caminho` arquivo por arquivo; **nunca** `git add -A`/`git add .`.
-- Mensagem/título pt-BR: `<tipo>(<escopo>): <descrição> [pendente]` (até existir Jira — D-01).
+- Mensagem/título pt-BR: `<tipo>(<escopo>): <descrição> [A2LG-N]` (chave da issue da spec no Jira A2LG).
 - Corpo: §10 da spec (Spec · O que foi feito · Evidência dos portões com saída real · Desvios · Checklist DoD · Risco QA).
 - `git push -u origin <branch>` e `gh pr create`. **Não faça merge**: `main` é protegida (CI obrigatório) e o arquiteto revisa com `agent-kit/.agent-kit/content/templates/pr-review-checklist.md`.
 

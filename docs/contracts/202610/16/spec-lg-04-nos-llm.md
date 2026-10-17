@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-04 |
 | **Status** | Pronta após SPEC-02 e SPEC-03 |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §3, §4 · ADR-003 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-5](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-5) (épico A2LG-1) |
 | **Branch** | `feat/lg-04-nos-llm` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-medium` |
@@ -62,4 +62,4 @@ Dependência → prompts → llm.py → nós → fakes → testes → portões �
 ## 10. PR
 Título: ver abaixo. Corpo: Spec · O que foi feito · Evidência dos portões (saída real) · Desvios · Checklist DoD · Risco QA.
 
-Título: `feat(llm): nós de intenção, SQL e resposta com retry guiado pelo guardrail [pendente]`
+Título: `feat(llm): nós de intenção, SQL e resposta com retry guiado pelo guardrail [A2LG-5]`

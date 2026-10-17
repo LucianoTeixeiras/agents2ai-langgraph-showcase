@@ -9,7 +9,7 @@
 
 ## 2026-10-16 — Decisões de Luciano (merge do PR #1)
 - ADR-001…005 **aceitas**; licença **MIT** confirmada.
-- **D-01** Jira: **projeto novo**, chave proposta `A2LG` ("Agents2AI LangGraph Showcase"), mesmo site do AKIT. O conector não cria projetos → Luciano cria; até lá commits seguem com `[pendente]`.
+- **D-01** Jira: **projeto novo**, chave proposta `A2LG` ("Agents2AI LangGraph Showcase"), mesmo site do AKIT. Criado por Luciano em 2026-10-16 (Kanban team-managed, board 249): épico A2LG-1, specs LG-01..09 = A2LG-2..10, aceite ADRs = A2LG-11.
 - **D-02** Dataset de referência: `bigquery-public-data.thelook_ecommerce` **confirmado**.
 - **D-03** Modelo padrão: Nemotron via OpenRouter, id `nvidia/nemotron-3.5-lightning` (verificado em 2026-10-16; US$ 0,07/M entrada, US$ 0,20/M saída).
 - **D-04** **Docker-first:** Fase 1 = protótipo 100% em Docker (compose + DuckDB sintético local, sem GCP). Fase 2 = BigQuery público em projeto GCP de testes da Agents2AI (SPEC-LG-08, Bloqueada). SPEC-LG-05 dividida: HITL + SqliteSaver + CLI (só DuckDB); nova SPEC-LG-07 (Docker).

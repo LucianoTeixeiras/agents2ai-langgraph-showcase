@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-07 |
 | **Status** | Pronta após SPEC-LG-05 |
 | **PRD / System Design / ADRs** | `system-design-agente-nl2sql-langgraph.md` §8a · ADR-002 (Fase 1), ADR-005 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-8](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-8) (épico A2LG-1) |
 | **Branch** | `feat/lg-07-docker` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-low` |
@@ -52,4 +52,4 @@ Arquivos → `docker compose build` local → rodar uma pergunta (com `LLM_API_K
 **Se a spec for ambígua, pare e pergunte; não improvise.** Abra o PR em rascunho e comente citando a seção.
 
 ## 10. PR
-Título: `build(docker): Dockerfile e compose do protótipo local [pendente]`
+Título: `build(docker): Dockerfile e compose do protótipo local [A2LG-8]`

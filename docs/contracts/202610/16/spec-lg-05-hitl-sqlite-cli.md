@@ -5,7 +5,7 @@
 | **ID** | SPEC-LG-05 |
 | **Status** | Pronta após SPEC-LG-04 |
 | **PRD / System Design / ADRs** | `prd-agente-nl2sql-langgraph.md` · `system-design-agente-nl2sql-langgraph.md` §5, §8 · ADR-001, ADR-005 |
-| **Jira** | pendente — D-01 (projeto novo `A2LG` a ser criado por Luciano) |
+| **Jira** | [A2LG-6](https://lucianoteixeiras-1773934569563.atlassian.net/browse/A2LG-6) (épico A2LG-1) |
 | **Branch** | `feat/lg-05-hitl-cli` |
 | **Executor sugerido** | `spec-executor` em Cursor + Composer |
 | **Risco QA** | `qa:risk-medium` |
@@ -57,4 +57,4 @@ Dependências → CLI → testes → portões → PR.
 ## 10. PR
 Corpo: Spec · O que foi feito · Evidência dos portões (saída real) · Desvios · Checklist DoD · Risco QA.
 
-Título: `feat(hitl): aprovação humana com SqliteSaver e CLI [pendente]`
+Título: `feat(hitl): aprovação humana com SqliteSaver e CLI [A2LG-6]`
