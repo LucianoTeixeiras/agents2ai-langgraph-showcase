@@ -19,14 +19,30 @@
 Criar o projeto GCP (Luciano), outros datasets, deploy em GCP (Cloud Run fica para spec futura).
 
 ## 3. Contexto mínimo
-`google.cloud.bigquery.Client(project=settings.gcp_project)`; `QueryJobConfig(dry_run=True, use_query_cache=False)` → `job.total_bytes_processed`; execução com `QueryJobConfig(maximum_bytes_billed=settings.max_bytes_billed)` (**API não verificada nesta data — reverifique ao desbloquear; se divergente, pare**). Revalide existência e colunas do dataset no console antes de começar.
+API **verificada em 2026-10-16** com `google-cloud-bigquery==3.46.2` (assinaturas da biblioteca instalada; use `google-cloud-bigquery>=3.46,<4`):
+```python
+from google.cloud import bigquery
+client = bigquery.Client(project=settings.gcp_project)
+# Client.query(query: str, job_config: QueryJobConfig | None = None, ..., location: str | None = None, ...) -> QueryJob
+
+def estimate_bytes(self, sql: str) -> int:
+    cfg = bigquery.QueryJobConfig(dry_run=True, use_query_cache=False)
+    job = self._client.query(sql, job_config=cfg)   # dry-run: não fatura, retorna na hora
+    return int(job.total_bytes_processed or 0)      # QueryJob.total_bytes_processed: int | None
+
+def run(self, sql: str, max_rows: int) -> list[dict]:
+    cfg = bigquery.QueryJobConfig(maximum_bytes_billed=self._settings.max_bytes_billed)  # int
+    rows = self._client.query(sql, job_config=cfg).result(max_results=max_rows)
+    return [dict(r.items()) for r in rows]
+```
+Se o job passar de `maximum_bytes_billed`, o BigQuery falha o job (sem cobrança) e `.result()` levanta `google.api_core.exceptions.BadRequest`: capture e devolva a mensagem fixa `"Consulta excede o limite de bytes faturáveis."`. Testes usam client fake que registra `job_config` (sem rede). Colunas reais do catálogo: System Design §7.
 
 ## 4. Arquivos e interfaces
 | Arquivo | Ação | O que muda |
 |---------|------|------------|
 | `pyproject.toml` / `uv.lock` | alterar | grupo opcional `bigquery = ["google-cloud-bigquery>=3.25"]` |
 | `src/showcase/settings.py` | alterar | + `gcp_project: str = ""`, `max_bytes_billed: int = 10_000_000_000`, `backend: Literal["duckdb","bigquery"]` |
-| `src/showcase/executors/bigquery_executor.py` | criar | `BigQueryExecutor(settings, client=None)`; `catalog()` fixo com as 4 tabelas qualificadas; import de `google.cloud.bigquery` **dentro** do construtor |
+| `src/showcase/executors/bigquery_executor.py` | criar | `BigQueryExecutor(settings, client=None)`; `catalog()` fixo com as 4 tabelas qualificadas e as colunas reais do System Design §7; import de `google.cloud.bigquery` **dentro** do construtor |
 | `src/showcase/cli.py` | alterar | `--backend duckdb|bigquery` |
 | `.env.example` | alterar | `GCP_PROJECT=`, `MAX_BYTES_BILLED=10000000000` |
 | `tests/test_bigquery_executor.py` | criar | client fake, sem rede |

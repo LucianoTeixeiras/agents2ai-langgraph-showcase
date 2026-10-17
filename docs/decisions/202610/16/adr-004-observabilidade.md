@@ -14,7 +14,7 @@ Recrutadores valorizam ver latência/custo por etapa. Não queremos dependência
 ## Decisão
 1. Decorador `traced` registra por nó `{"node", "ms", "tokens_in", "tokens_out"}` no campo `trace` do estado.
 2. Uma linha JSON `INFO` por execução (logger `showcase`), com `thread_id`, totais e lista de nós; **sem** SQL bruto com valores literais, sem prompts, sem chaves.
-3. LangSmith: ativado apenas se `LANGSMITH_TRACING=true` e chave presentes (comportamento nativo do LangChain/LangGraph; **não verificado** nesta data para 1.2.x).
+3. LangSmith: ativado apenas por env, comportamento nativo (verificado em 2026-10-16 no código de `langsmith==0.14.11`, dependência transitiva de `langchain-core==1.6.11`/`langgraph==1.2.15`): `langsmith.utils.tracing_is_enabled()` retorna `True` quando `LANGSMITH_TRACING_V2` ou `LANGSMITH_TRACING` (fallback: prefixo `LANGCHAIN_`) vale exatamente `"true"`. Demais variáveis: `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` (opcional), `LANGSMITH_ENDPOINT` (padrão `https://api.smith.langchain.com`). O código **não** lê essas variáveis; só as documenta no `.env.example` (vazias, `LANGSMITH_TRACING=false`). Os testes fazem `monkeypatch.delenv` de `LANGSMITH_TRACING`, `LANGSMITH_TRACING_V2`, `LANGCHAIN_TRACING_V2` para nunca enviar traces no CI.
 4. OpenTelemetry: fase 2, alinhado ao destino escolhido no copilot (Langfuse, D-05).
 5. Evals reportam p50/p95 por nó a partir de `trace`.
 

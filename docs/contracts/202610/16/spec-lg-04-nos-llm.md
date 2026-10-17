@@ -20,7 +20,15 @@
 Custo/HITL reais, BigQuery, CLI, tracing, streaming, tool calling.
 
 ## 3. Contexto mínimo
-Nós em `src/showcase/nodes/core.py`; protocolo `LLMClient.complete(system, user) -> str`; `FakeLLM` em `tests/fakes.py`. `langchain_openai.ChatOpenAI(base_url=..., api_key=..., model=..., temperature=0, timeout=30, max_retries=1)`; `.invoke([("system", s), ("human", u)]).content` (**verificar no Cursor que o atributo `.content` é str na versão instalada; se não, pare**).
+Nós em `src/showcase/nodes/core.py`; protocolo `LLMClient.complete(system, user) -> str`; `FakeLLM` em `tests/fakes.py`. `langchain_openai.ChatOpenAI(base_url=..., api_key=..., model=..., temperature=0, timeout=30, max_retries=1)`; `.invoke([("system", s), ("human", u)])` retorna `AIMessage`. **Verificado em 2026-10-16** (langchain-openai 1.7.2 / langchain-core 1.6.11): `AIMessage.content` é `str | list[str | dict]` (blocos `{"type": "text", "text": ...}` podem vir de alguns provedores), e a propriedade `AIMessage.text` concatena os blocos de texto e devolve `str`. **Não use `.content` diretamente**; use exatamente este helper em `src/showcase/llm.py`:
+```python
+from langchain_core.messages import BaseMessage
+
+def message_text(msg: BaseMessage) -> str:
+    """Normaliza content str|list para str (só blocos de texto)."""
+    return msg.text.strip()
+```
+Em `OpenAICompatLLM.complete`: `return message_text(self._chat.invoke([("system", system), ("human", user)]))`. Teste extra obrigatório em `tests/test_llm_nodes.py`: `test_message_text_normaliza_lista` → `message_text(AIMessage(content=[{"type": "text", "text": "SELECT 1"}, {"type": "text", "text": " LIMIT 1"}])) == "SELECT 1 LIMIT 1"` e `message_text(AIMessage(content=" x ")) == "x"".
 
 ## 4. Arquivos e interfaces
 | Arquivo | Ação | O que muda |
