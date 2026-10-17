@@ -31,7 +31,7 @@ Repositório público, vitrine de consultoria. Qualquer dado ou identificador de
 ## Consequências
 - **Positivas:** zero risco de dado de cliente; CI barato.
 - **Negativas:** acurácia em dados sintéticos ≠ produção.
-- **Riscos residuais:** schema do thelook mudar → verificar antes da SPEC-05 (não verificado nesta data).
+- **Riscos residuais:** schema do thelook mudar → existência e colunas conferidas em 2026-10-16 (ver System Design §7); `test_bq_catalogo_so_tabelas_publicas` fixa o catálogo e um dry-run manual ao desbloquear a SPEC-LG-08 detecta divergência.
 
 ## Conformidade
 Teste de guardrail rejeita tabela fora da allowlist; gitleaks; revisão bloqueia qualquer `project_id` que não seja da Agents2AI.
